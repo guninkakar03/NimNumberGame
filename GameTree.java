@@ -7,6 +7,7 @@ public class GameTree {
 
     public GameTree(int piles, String player){
         this.head = new GameState(player, piles);
+        this.generateTree();
     }
 
     public void generateTree(){
@@ -28,7 +29,9 @@ public class GameTree {
 
     public static void printTree(){
         GameTree tree = new GameTree(5, "human");
+        System.out.println(tree.head.piles);
     }
+
 
     public static void main(String args[]){
         GameTree.printTree();
