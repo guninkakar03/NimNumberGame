@@ -3,27 +3,18 @@ import java.util.List;
 
 public class GameTree {
 
+    ArrayList<Integer> choices = new ArrayList<>(List.of(1, 2, 3));
     GameState head;
 
     public GameTree(int piles, String player){
         this.head = new GameState(player, piles);
-        this.generateTree();
+//        this.generateTree();
     }
 
-    public void generateTree(){
-        if(this.head.isEndState){
-            return;
-        }
-        ArrayList<GameState> queue = new ArrayList<>(List.of(this.head));
-        while (queue.size()>0){
-            GameState currentState = queue.get(0);
-            queue.remove(0);
-            ArrayList<GameState> childStates = currentState.generateChild();
-            for(GameState state: childStates){
-                if(state.isEndState == false){
-                    queue.add(state);
-                }
-            }
+    public void generateTree(GameState startingState){
+        ch
+        for(int choice: choices){
+
         }
     }
 

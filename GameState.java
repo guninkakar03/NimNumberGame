@@ -19,19 +19,19 @@ public class GameState {
         }
     }
 
-    public ArrayList<GameState> generateChild() {
-        String newPlayer = player.equals("computer") ? "human" : "computer";
-        ArrayList<GameState> gameStates = new ArrayList<>();
-
-        for (int i = 0; i < choices.size(); i++) {
-            int gameStateValue = choices.get(i);
-            int gamePileNumber = this.piles - gameStateValue;
-            if(gamePileNumber<0) continue;
-            GameState newstate = new GameState(newPlayer, gamePileNumber);
-            gameStates.add(newstate);
-            newstate.value = gameStateValue;
-        }
-        this.childState = gameStates;
-        return gameStates;
-    }
+//    public ArrayList<GameState> generateChild() {
+//        String newPlayer = player.equals("computer") ? "human" : "computer";
+//        ArrayList<GameState> gameStates = new ArrayList<>();
+//
+//        for (int i = 0; i < choices.size(); i++) {
+//            int gameStateValue = choices.get(i);
+//            int gamePileNumber = this.piles - gameStateValue;
+//            if(gamePileNumber<0) continue;
+//            GameState newstate = new GameState(newPlayer, gamePileNumber);
+//            gameStates.add(newstate);
+//            newstate.value = gameStateValue;
+//        }
+//        this.childState = gameStates;
+//        return gameStates;
+//    }
 }

@@ -31,8 +31,7 @@ public class NimNumber {
     }
 
     public int getComputerMove(){
-
-
+        return 0;
     }
 
     public void playGame(){
