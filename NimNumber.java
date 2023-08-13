@@ -2,34 +2,24 @@ import java.util.Scanner;
 
 public class NimNumber {
 
+    private int numberOfBalls = 10;
+    private GameState startingState;
+
     public void printGame(){
         System.out.println("The current state of pile:");
         System.out.println("" + "○ ".repeat(Math.max(0, this.numberOfBalls)));
     }
-    private int numberOfBalls;
 
     public int playGame(){
         System.out.println("Welcome to the Nim Number Game! The game starts with " + 10 + " balls in the pile.");
-        System.out.print("Choose your level of difficulty - Easy or Hard\n>");
-        while(true) {
-            Scanner scanner = new Scanner(System.in);
-            String level = scanner.nextLine().toUpperCase();
-            if (level.equals("EASY")) {
-                int numRounds = 0;
-                while (true) {
-                    System.out.println("**************************************");
-                    System.out.println("Round:" + numRounds);
-                    printGame();
-                    if (humanMove() == true) {
-                        return 1;
-                    }
-//                    if (computerMove() == true) {
-//                        return 0;
-//                    }
-                    numRounds++;
-                }
-            } else {
-                System.out.print("Please choose a valid level of difficulty.\n >");
+        while (true) {
+            System.out.println("**************************************");
+            printGame();
+            if (humanMove() == true) {
+                return 1;
+            }
+            if (computerMove() == true) {
+                return 0;
             }
         }
     }
@@ -58,38 +48,19 @@ public class NimNumber {
         return false;
     }
 
+    public boolean computerMove(){
 
+        startingState = new GameState("computer", this.numberOfBalls);
+        GameTree tree = new GameTree(this.numberOfBalls, "computer");
+        int bestMove = tree.pilesToBeRemoved(startingState);
+        System.out.println("Computer chose " + bestMove + " balls from the pile.");
+        this.numberOfBalls -= bestMove;
+        if(this.numberOfBalls <= 0){
+            System.out.println("Computer won!");
+            return true; // Computer player wins
+        }
+        return false;
 
-
-    //    public NimNumber(int gamePileNumber){
-//        this.gamePileNumber = gamePileNumber;
-//        this.gameTree = new GameTree(gamePileNumber, "human");
-//    }
-//
-//    public void gameState(){
-//        String val = "";
-//        for(int i = 0; i < this.currentState.piles; i++){
-//            val += "o";
-//        }
-//
-//        System.out.println(val);
-//    }
-//
-//    public int getPlayerMove(){
-//        System.out.println("Your turn. Enter the number of stones you want to remove from the pile.");
-//        int playerMove = Integer.parseInt(System.console().readLine());
-//        if(playerMove > 3 || playerMove < 1){
-//            System.out.println("Invalid move. You must remove between 1 and 3 stones.");
-//            this.getPlayerMove();
-//        }
-//        return playerMove;
-//
-//    }
-//
-//    public int getComputerMove(){
-//        return 0;
-//    }
-//
-
+    }
 
 }

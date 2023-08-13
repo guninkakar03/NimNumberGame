@@ -10,24 +10,18 @@ import java.lang.Math;
  */
 public class GameTree {
 
-    ArrayList<Integer> choices = new ArrayList<>(List.of(1, 2, 3));
+    static ArrayList<Integer> choices = new ArrayList<>(List.of(1, 2, 3));
     GameState head;
 
     public GameTree(int piles, String player){
         this.head = new GameState(player, piles);
-//        this.generateTree();
     }
 
     public static void printTree(){
         GameTree tree = new GameTree(5, "human");
         System.out.println(tree.head.piles);
     }
-
-
-    public static void main(String args[]){
-        GameTree.printTree();
-    }
-    public int pilesToBeRemoved(GameState startingState) {
+    public static int pilesToBeRemoved(GameState startingState) {
         int bestMove = -1;
         int bestValue = Integer.MIN_VALUE;
 
@@ -53,7 +47,7 @@ public class GameTree {
         return bestMove;
     }
 
-    public int buildMinMaxTree(GameState startingState, boolean isMaximizingPlayer) {
+    public static int buildMinMaxTree(GameState startingState, boolean isMaximizingPlayer) {
         if (startingState.isEndState) {
             return startingState.value; // Assuming getValue() returns -1 or 1 for end states
         }
