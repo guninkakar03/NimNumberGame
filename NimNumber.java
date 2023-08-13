@@ -12,15 +12,37 @@ public class NimNumber {
 
     public int playGame(){
         System.out.println("Welcome to the Nim Number Game! The game starts with " + 10 + " balls in the pile.");
-        while (true) {
-            System.out.println("**************************************");
-            printGame();
-            if (humanMove() == true) {
-                return 1;
+        System.out.println("Who wants to go first? (computer/human)");
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.nextLine();
+        if(choice.equals("computer")){
+            System.out.println("Computer goes first.");
+            while (true) {
+                System.out.println("**************************************");
+                if (computerMove() == true) {
+                    return 0;
+                }
+                printGame();
+                if (humanMove() == true) {
+                    return 1;
+                }
             }
-            if (computerMove() == true) {
-                return 0;
+        } else if (choice.equals("human")){
+            System.out.println("Human goes first.");
+            while (true) {
+                System.out.println("**************************************");
+                printGame();
+                if (humanMove() == true) {
+                    return 1;
+                }
+                if (computerMove() == true) {
+                    return 0;
+                }
             }
+        }
+        else {
+            System.out.println("Please enter either computer or human.");
+            return playGame();
         }
     }
 
