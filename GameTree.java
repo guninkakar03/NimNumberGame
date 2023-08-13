@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math;
 
 /** The first player is always the computer -- the second is the player.
  * The computer maximises at its level and the player minimizes at its level.
@@ -17,14 +18,49 @@ public class GameTree {
 //        this.generateTree();
     }
 
-    public int generateTree(GameState startingState){
-        if(startingState.isEndState) {
-            return;
+    public static void printTree(){
+        GameTree tree = new GameTree(5, "human");
+        System.out.println(tree.head.piles);
+    }
+
+
+    public static void main(String args[]){
+        GameTree.printTree();
+    }
+    public int pilesToBeRemoved(GameState startingState) {
+        int bestMove = -1;
+        int bestValue = Integer.MIN_VALUE;
+
+        ArrayList<GameState> children = new ArrayList<>(); // All the children states
+        String tempPlayer = startingState.player.equals("computer")? "human": "computer";
+
+        for(int choice: choices){
+            int tempPiles = startingState.piles-choice;
+
+            if (tempPiles>=0) {
+                GameState newState = new GameState(tempPlayer, tempPiles);
+                children.add(newState);
+            }
+        }
+        for (GameState child : children) {
+            int childValue = buildMinMaxTree(child, false);
+            if (childValue > bestValue) {
+                bestValue = childValue;
+                bestMove = startingState.piles - child.piles;
+            }
         }
 
+        return bestMove;
+    }
 
-        String tempPlayer = startingState.player.equals("computer")? "human": "computer";
+    public int buildMinMaxTree(GameState startingState, boolean isMaximizingPlayer) {
+        if (startingState.isEndState) {
+            return startingState.value; // Assuming getValue() returns -1 or 1 for end states
+        }
+
         ArrayList<GameState> children = new ArrayList<>(); // All the children states
+        String tempPlayer = startingState.player.equals("computer")? "human": "computer";
+
         for(int choice: choices){
             int tempPiles = startingState.piles-choice;
 
@@ -34,20 +70,22 @@ public class GameTree {
             }
         }
 
-        if (startingState.player.equals("computer")) {
-
+        int bestValue;
+        if (isMaximizingPlayer) {
+            bestValue = Integer.MIN_VALUE;
+            for (GameState child : children) {
+                int childValue = buildMinMaxTree(child, false);
+                bestValue = Math.max(bestValue, childValue);
+            }
+        } else {
+            bestValue = Integer.MAX_VALUE;
+            for (GameState child : children) {
+                int childValue = buildMinMaxTree(child, true);
+                bestValue = Math.min(bestValue, childValue);
+            }
         }
 
-    }
-
-    public static void printTree(){
-        GameTree tree = new GameTree(5, "human");
-        System.out.println(tree.head.piles);
-    }
-
-
-    public static void main(String args[]){
-        GameTree.printTree();
+        return bestValue;
     }
 
 }
