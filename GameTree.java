@@ -43,7 +43,7 @@ public class GameTree {
             }
         }
         for (GameState child : children) {
-            int childValue = buildMinMaxTree(child, false);
+            int childValue = buildMinMaxTree(child, true);
             if (childValue > bestValue) {
                 bestValue = childValue;
                 bestMove = startingState.piles - child.piles;

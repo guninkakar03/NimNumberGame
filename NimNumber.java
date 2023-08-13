@@ -2,41 +2,6 @@ import java.util.Scanner;
 
 public class NimNumber {
 
-    int gamePileNumber;
-
-    GameState currentState;
-
-    GameTree gameTree;
-    public NimNumber(int gamePileNumber){
-        this.gamePileNumber = gamePileNumber;
-        this.gameTree = new GameTree(gamePileNumber, "human");
-    }
-
-    public void gameState(){
-        String val = "";
-        for(int i = 0; i < this.currentState.piles; i++){
-            val += "o";
-        }
-
-        System.out.println(val);
-    }
-
-    public int getPlayerMove(){
-        System.out.println("Your turn. Enter the number of stones you want to remove from the pile.");
-        int playerMove = Integer.parseInt(System.console().readLine());
-        if(playerMove > 3 || playerMove < 1){
-            System.out.println("Invalid move. You must remove between 1 and 3 stones.");
-            this.getPlayerMove();
-        }
-        return playerMove;
-
-    }
-
-    public int getComputerMove(){
-        return 0;
-    }
-
-
     public void printGame(){
         System.out.println("The current state of pile:");
         System.out.println("" + "○ ".repeat(Math.max(0, this.numberOfBalls)));
@@ -58,9 +23,9 @@ public class NimNumber {
                     if (humanMove() == true) {
                         return 1;
                     }
-                    if (computerMove() == true) {
-                        return 0;
-                    }
+//                    if (computerMove() == true) {
+//                        return 0;
+//                    }
                     numRounds++;
                 }
             } else {
@@ -92,5 +57,39 @@ public class NimNumber {
         }
         return false;
     }
+
+
+
+
+    //    public NimNumber(int gamePileNumber){
+//        this.gamePileNumber = gamePileNumber;
+//        this.gameTree = new GameTree(gamePileNumber, "human");
+//    }
+//
+//    public void gameState(){
+//        String val = "";
+//        for(int i = 0; i < this.currentState.piles; i++){
+//            val += "o";
+//        }
+//
+//        System.out.println(val);
+//    }
+//
+//    public int getPlayerMove(){
+//        System.out.println("Your turn. Enter the number of stones you want to remove from the pile.");
+//        int playerMove = Integer.parseInt(System.console().readLine());
+//        if(playerMove > 3 || playerMove < 1){
+//            System.out.println("Invalid move. You must remove between 1 and 3 stones.");
+//            this.getPlayerMove();
+//        }
+//        return playerMove;
+//
+//    }
+//
+//    public int getComputerMove(){
+//        return 0;
+//    }
+//
+
 
 }
