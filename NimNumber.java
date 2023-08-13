@@ -14,7 +14,7 @@ public class NimNumber {
         System.out.println("Welcome to the Nim Number Game! The game starts with " + 10 + " balls in the pile.");
         System.out.println("Who wants to go first? (computer/human)");
         Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine();
+        String choice = scanner.nextLine().toLowerCase();
         if(choice.equals("computer")){
             System.out.println("Computer goes first.");
             while (true) {
